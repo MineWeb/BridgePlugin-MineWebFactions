@@ -28,7 +28,7 @@ public class GetFactions implements IMethod {
             Hashtable<String, Object> f = new Hashtable<>();
             f.put("id", faction.getId());
             f.put("name", faction.getName());
-            f.put("description", faction.getMotdDesc());
+            f.put("description", faction.getDescriptionDesc());
             f.put("claims_count", faction.getLandCount());
 
             // Power
