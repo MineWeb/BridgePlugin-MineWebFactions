@@ -36,6 +36,7 @@ public class GetFactions implements IMethod {
             power.put("max", faction.getPowerMax());
             power.put("current", faction.getPower());
             f.put("power", power);
+            f.put("leader", faction.getLeader().getName());
 
             // Players
             ArrayList<String> players = new ArrayList<>();
