@@ -1,0 +1,6 @@
+name: MinewebFactions
+main: fr.eywek.minewebfactions.Core
+version: 1.0.0
+description: Add methods to MinewebBridge plugin
+author: Eywek
+depend: [MinewebBridge, Factions]
