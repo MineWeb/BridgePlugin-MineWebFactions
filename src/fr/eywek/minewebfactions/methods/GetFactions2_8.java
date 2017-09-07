@@ -1,6 +1,5 @@
 package fr.eywek.minewebfactions.methods;
 
-import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.MPlayer;
@@ -13,22 +12,21 @@ import java.util.Hashtable;
 import java.util.Objects;
 
 @MethodHandler
-public class GetFactions implements IMethod {
+public class GetFactions2_8 implements IMethod {
 
     @Override
     public Object execute(ICore instance, Object... inputs) {
         ArrayList<Hashtable> factions = new ArrayList<>();
-        for (Faction faction : FactionColl.get().getAll())
-        {
+        for (Faction faction : FactionColl.get().getAll()) {
             if (Objects.equals(faction.getName(), FactionColl.get().getNone().getName()) ||
-                Objects.equals(faction.getName(), FactionColl.get().getSafezone().getName()) ||
-                Objects.equals(faction.getName(), FactionColl.get().getWarzone().getName()))
+                    Objects.equals(faction.getName(), FactionColl.get().getSafezone().getName()) ||
+                    Objects.equals(faction.getName(), FactionColl.get().getWarzone().getName()))
                 continue;
             // Basic
             Hashtable<String, Object> f = new Hashtable<>();
             f.put("id", faction.getId());
             f.put("name", faction.getName());
-            f.put("description", faction.getDescriptionDesc());
+            f.put("description", faction.getDescription());
             f.put("claims_count", faction.getLandCount());
 
             // Power
@@ -40,8 +38,7 @@ public class GetFactions implements IMethod {
 
             // Players
             ArrayList<String> players = new ArrayList<>();
-            for (MPlayer mplayer : faction.getMPlayers())
-            {
+            for (MPlayer mplayer : faction.getMPlayers()) {
                 players.add(mplayer.getName());
             }
             f.put("players", players);
