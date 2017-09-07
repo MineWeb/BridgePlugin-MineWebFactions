@@ -1,9 +1,8 @@
 package fr.eywek.minewebfactions.methods;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.FactionColl;
-import com.massivecraft.factions.entity.MPlayer;
 import fr.vmarchaud.mineweb.common.ICore;
 import fr.vmarchaud.mineweb.common.IMethod;
 import fr.vmarchaud.mineweb.common.MethodHandler;
@@ -13,34 +12,34 @@ import java.util.Hashtable;
 import java.util.Objects;
 
 @MethodHandler
-public class GetFactions implements IMethod {
+public class GetFactionsUUID implements IMethod {
 
     @Override
     public Object execute(ICore instance, Object... inputs) {
         ArrayList<Hashtable> factions = new ArrayList<>();
-        for (Faction faction : FactionColl.get().getAll())
+        for (Faction faction : Factions.getInstance().getAllFactions())
         {
-            if (Objects.equals(faction.getName(), FactionColl.get().getNone().getName()) ||
-                Objects.equals(faction.getName(), FactionColl.get().getSafezone().getName()) ||
-                Objects.equals(faction.getName(), FactionColl.get().getWarzone().getName()))
+            if (Objects.equals(faction.getTag(), Factions.getInstance().getWilderness().getTag()) ||
+                    Objects.equals(faction.getTag(), Factions.getInstance().getSafeZone().getTag()) ||
+                    Objects.equals(faction.getTag(), Factions.getInstance().getWarZone().getTag()))
                 continue;
             // Basic
             Hashtable<String, Object> f = new Hashtable<>();
             f.put("id", faction.getId());
-            f.put("name", faction.getName());
-            f.put("description", faction.getDescriptionDesc());
-            f.put("claims_count", faction.getLandCount());
+            f.put("name", faction.getTag());
+            f.put("description", faction.getDescription());
+            f.put("claims_count", faction.getLandRounded());
 
             // Power
             Hashtable<String, Double> power = new Hashtable<>();
             power.put("max", faction.getPowerMax());
             power.put("current", faction.getPower());
             f.put("power", power);
-            f.put("leader", faction.getLeader().getName());
+            f.put("leader", faction.getFPlayerAdmin().getName());
 
             // Players
             ArrayList<String> players = new ArrayList<>();
-            for (MPlayer mplayer : faction.getMPlayers())
+            for (FPlayer mplayer : faction.getFPlayers())
             {
                 players.add(mplayer.getName());
             }
