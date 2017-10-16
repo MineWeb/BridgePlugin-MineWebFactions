@@ -19,7 +19,14 @@ public class GetFactionsUUID implements IMethod {
         ArrayList<Hashtable> factions = new ArrayList<>();
         for (Faction faction : Factions.getInstance().getAllFactions())
         {
-            if (Objects.equals(faction.getTag(), Factions.getInstance().getWilderness().getTag()) ||
+            Faction wilderness;
+            try {
+                Factions.getInstance().getClass().getMethod("getWilderness");
+                wilderness = Factions.getInstance().getWilderness();
+            } catch (Exception e) {
+                wilderness = Factions.getInstance().getNone();
+            }
+            if (Objects.equals(faction.getTag(), wilderness.getTag()) ||
                     Objects.equals(faction.getTag(), Factions.getInstance().getSafeZone().getTag()) ||
                     Objects.equals(faction.getTag(), Factions.getInstance().getWarZone().getTag()))
                 continue;
