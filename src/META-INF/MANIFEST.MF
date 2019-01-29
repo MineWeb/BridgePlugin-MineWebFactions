@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: Factions.jar MassiveCore.jar mineweb_bridge-2.0.0.jar Fact
+ ions.jar MassiveCore.jar spigot-api-latest.jar Factions.jar MassiveCo
+ re.jar mcore.jar Factions.jar Factions.jar Factions.jar
+
